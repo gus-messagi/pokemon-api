@@ -1,12 +1,9 @@
-const Mongoose = require('mongoose');
-const dotenv = require('dotenv');
+const faunadb = require('faunadb');
 
-dotenv.config();
+const client = new faunadb.Client({ secret: process.env.SECRET_FAUNADB_KEY });
+const query = faunadb.query;
 
-const connection = () =>
-  Mongoose.connect(process.env.MONGO_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
-
-module.exports = connection;
+module.exports = {
+  client,
+  query
+};
